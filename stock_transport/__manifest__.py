@@ -10,9 +10,10 @@
     'installable': True,
     'application': True,
     'license': 'OEEL-1',
-    'depends': ['stock_picking_batch', 'fleet', 'stock_delivery'],
+    'depends': ['stock_picking_batch', 'fleet'],
     'data': [
         'views/fleet_category_model_view.xml',
         'views/stock_picking_batch_form.xml',
+        'security/ir.model.access.csv'
     ]
 }

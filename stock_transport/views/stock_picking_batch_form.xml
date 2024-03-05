@@ -17,6 +17,7 @@
             <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='scheduled_date']" position="after">
+                    <field name="docking_id"/>
                     <field name="vehicle_id"/>
                     <field name="vehicle_category_id"/>
                     <field name="weight" widget="progressbar"/>
@@ -32,8 +33,9 @@
                     <field name="scheduled_date"/>
                     <field name="weight"/>
                     <field name="volume"/>
+                    <field name="number_of_transfers" />
+                    <field name="number_of_moves" />
                     <field name="vehicle_category_id"/>
-                    <field name="picking_ids"/>
                 </graph>
             </field>
         </record>
@@ -45,5 +47,29 @@
             <field name="act_window_id" ref="stock_picking_batch.stock_picking_batch_action"/>
         </record>  
            
+        <record id="stock_picking_batch_gantt" model="ir.ui.view">
+            <field name="name">stock.picking.batch.gantt.view</field>
+            <field name="model">stock.picking.batch</field>
+            <field name="arch" type="xml">
+                <gantt string="Batch Transfer" 
+                    date_stop="date_end" 
+                    date_start="date_start" 
+                    default_group_by="docking_id,vehicle_id" 
+                    decoration-info="state == 'draft'"
+                    default_scale="week">
+                    <field name="state" />
+                    <field name="scheduled_date"/>
+                    <field name="vehicle_category_id"/>
+                </gantt>
+            </field>
+        </record>
+
+        <record id="stock_picking_batch_gantt_action" model="ir.actions.act_window.view">
+            <field name="sequence" eval="6"/>
+            <field name="view_mode">gantt</field>
+            <field name="view_id" ref="stock_transport.stock_picking_batch_gantt"/>
+            <field name="act_window_id" ref="stock_picking_batch.stock_picking_batch_action"/>
+        </record> 
+
     </data>
 </odoo>
