@@ -10,7 +10,7 @@
     "auto_install": True,
     "license": "OEEL-1",
     "version": "1.0",
-    "depends": ["base", "stock"],
+    "depends": ["stock"],
     "data": [
         "views/res_config_setting_view.xml",
     ]
